@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName>"$/Noah3D New Project", PAEAAAAA</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <ProjectGuid>{188DDD95-7DC1-4FC4-99E8-AE48AC798970}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <MinimalRebuild>true</MinimalRebuild>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Debug\N3Base.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+    </ClCompile>
+    <ResourceCompile>
+      <Culture>0x0412</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\N3Base.bsc</OutputFile>
+    </Bscmake>
+    <Lib>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\N3Base.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\Release\N3Base.pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <Culture>0x0412</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\N3Base.bsc</OutputFile>
+    </Bscmake>
+    <Lib>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\N3Base.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="N3AnimControl.cpp" />
+    <ClCompile Include="N3AnimKey.cpp" />
+    <ClCompile Include="N3Base.cpp" />
+    <ClCompile Include="N3Camera.cpp" />
+    <ClCompile Include="N3Chr.cpp" />
+    <ClCompile Include="N3Eng.cpp" />
+    <ClCompile Include="N3IMesh.cpp" />
+    <ClCompile Include="N3Joint.cpp" />
+    <ClCompile Include="N3Light.cpp" />
+    <ClCompile Include="N3Mesh.cpp" />
+    <ClCompile Include="N3Moon.cpp" />
+    <ClCompile Include="N3PMesh.cpp" />
+    <ClCompile Include="N3PMeshCreate.cpp" />
+    <ClCompile Include="N3PMeshInstance.cpp" />
+    <ClCompile Include="N3River2.cpp" />
+    <ClCompile Include="N3Scene.cpp" />
+    <ClCompile Include="N3Shape.cpp" />
+    <ClCompile Include="N3Skin.cpp" />
+    <ClCompile Include="N3Texture.cpp" />
+    <ClCompile Include="N3Transform.cpp" />
+    <ClCompile Include="N3TransformCollision.cpp" />
+    <ClCompile Include="N3VMesh.cpp" />
+    <ClCompile Include="Pick.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="My_3DStruct.h" />
+    <ClInclude Include="My_3DStructExt.h" />
+    <ClInclude Include="My_Macro.h" />
+    <ClInclude Include="N3AnimControl.h" />
+    <ClInclude Include="N3AnimKey.h" />
+    <ClInclude Include="N3Base.h" />
+    <ClInclude Include="N3Camera.h" />
+    <ClInclude Include="N3Chr.h" />
+    <ClInclude Include="N3DMesh.h" />
+    <ClInclude Include="N3DUtil.h" />
+    <ClInclude Include="N3Eng.h" />
+    <ClInclude Include="N3IMesh.h" />
+    <ClInclude Include="N3Joint.h" />
+    <ClInclude Include="N3Light.h" />
+    <ClInclude Include="N3LinkedList.h" />
+    <ClInclude Include="N3Mesh.h" />
+    <ClInclude Include="N3Mng.h" />
+    <ClInclude Include="N3Moon.h" />
+    <ClInclude Include="N3PMesh.h" />
+    <ClInclude Include="N3PMeshCreate.h" />
+    <ClInclude Include="N3PMeshInstance.h" />
+    <ClInclude Include="N3River2.h" />
+    <ClInclude Include="N3Scene.h" />
+    <ClInclude Include="N3Shape.h" />
+    <ClInclude Include="N3Skin.h" />
+    <ClInclude Include="N3SMesh.h" />
+    <ClInclude Include="N3SubScene.h" />
+    <ClInclude Include="N3Texture.h" />
+    <ClInclude Include="N3Transform.h" />
+    <ClInclude Include="N3TransformCollision.h" />
+    <ClInclude Include="N3VectorAndMatrix.h" />
+    <ClInclude Include="N3VMesh.h" />
+    <ClInclude Include="Pick.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="N3DUtil.inl" />
+    <CustomBuild Include="N3VectorAndMatrix.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
