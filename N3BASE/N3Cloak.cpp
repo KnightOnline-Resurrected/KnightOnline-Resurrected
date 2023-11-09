@@ -8,17 +8,6 @@
 #include "N3PMeshInstance.h"
 #include "../WarFare/PlayerBase.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
-
 CN3Cloak::CN3Cloak()
 {
 //	m_pPMesh = NULL;
@@ -161,7 +150,7 @@ void CN3Cloak::Render(__Matrix44 &mtx)
 			s_lpD3DDev->DrawPrimitiveUP(D3DPT_LINELIST, 1, Vtx, sizeof(__VertexXyzColor));
 		}
 	}
-	for ( i = 0 ; i< m_nGridH-1;i++)
+	for (auto i = 0 ; i< m_nGridH-1;i++)
 	{
 		for (int j=0;j<m_nGridW;j++)
 		{
@@ -416,7 +405,7 @@ void CN3Cloak::ApplyOffset(D3DXVECTOR3	&vDif)
 		m_fOffsetRecoveryTime = 1.4f;
 	}
 	else
-	{	// offset ÀÌ Àû¿ëµÇ¾î ÀÖ´Â »óÅÂ.
+	{	// offset ì´ ì ìš©ë˜ì–´ ìžˆëŠ” ìƒíƒœ.
 		m_fOffsetRecoveryTime -= s_fSecPerFrm;
 		if (m_fOffsetRecoveryTime < 0.0f)
 		{	// Recovery process
@@ -441,7 +430,7 @@ void CN3Cloak::TickYaw()
 
 	float fYaw = m_bpPlayerBase->Yaw();	
 	if (fYaw != m_fPrevYaw)
-	{	// È¸ÀüÀÌ ÀÖ¾ú´Ù.
+	{	// íšŒì „ì´ ìžˆì—ˆë‹¤.
 		if (fYaw - m_fPrevYaw > 0.0f)
 		{
 			if (m_eAnchorPattern == AMP_NONE && m_fAnchorPreserveTime < 0.0f)

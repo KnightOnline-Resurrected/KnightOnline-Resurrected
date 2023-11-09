@@ -5,21 +5,11 @@
 #include "N3VMesh.h"
 #include "N3IMesh.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 CN3VMesh::CN3VMesh()
 {
 	m_dwType |= OBJ_MESH_VECTOR3;
 	
-	m_pVertices = NULL; // Á¡ ¹öÆÛ
+	m_pVertices = NULL; // ì  ë²„í¼
 	m_pwIndices = NULL; // Index...
 
 	m_nVC = 0;
@@ -27,7 +17,7 @@ CN3VMesh::CN3VMesh()
 
 	m_vMin.Zero();
 	m_vMax.Zero();
-	m_fRadius = 0.0f; // ¹İÁö¸§
+	m_fRadius = 0.0f; // ë°˜ì§€ë¦„
 }
 
 CN3VMesh::~CN3VMesh()
@@ -49,7 +39,7 @@ void CN3VMesh::Release()
 
 	m_vMin.Zero();
 	m_vMax.Zero();
-	m_fRadius = 0.0f; // ¹İÁö¸§
+	m_fRadius = 0.0f; // ë°˜ì§€ë¦„
 }
 
 bool CN3VMesh::Load(HANDLE hFile)
@@ -59,10 +49,10 @@ bool CN3VMesh::Load(HANDLE hFile)
 	DWORD dwRWC = 0;
 
 	int nVC;
-	ReadFile(hFile, &nVC, 4, &dwRWC, NULL); // Á¡°¹¼ö ÀĞ±â..
+	ReadFile(hFile, &nVC, 4, &dwRWC, NULL); // ì ê°¯ìˆ˜ ì½ê¸°..
 	if(nVC > 0)
 	{
-		this->CreateVertices(nVC); // Vertex Buffer »ı¼º ¹× µ¥ÀÌÅÍ Ã¤¿ì±â
+		this->CreateVertices(nVC); // Vertex Buffer ìƒì„± ë° ë°ì´í„° ì±„ìš°ê¸°
 		ReadFile(hFile, m_pVertices, nVC * sizeof(__Vector3), &dwRWC, NULL);
 	}
 
@@ -70,11 +60,11 @@ bool CN3VMesh::Load(HANDLE hFile)
 	ReadFile(hFile, &nIC, 4, &dwRWC, NULL); // Index Count..
 	if(nIC > 0)
 	{
-		this->CreateIndex(nIC); // Vertex Buffer »ı¼º ¹× µ¥ÀÌÅÍ Ã¤¿ì±â
+		this->CreateIndex(nIC); // Vertex Buffer ìƒì„± ë° ë°ì´í„° ì±„ìš°ê¸°
 		ReadFile(hFile, m_pwIndices, nIC * 2, &dwRWC, NULL);
 	}
 
-	this->FindMinMax(); // ÃÖ´ë ÃÖ¼ÒÁ¡°ú Áß½ÉÁ¡°ú ¹İÁö¸§À» °è»êÇØ ÁØ´Ù..
+	this->FindMinMax(); // ìµœëŒ€ ìµœì†Œì ê³¼ ì¤‘ì‹¬ì ê³¼ ë°˜ì§€ë¦„ì„ ê³„ì‚°í•´ ì¤€ë‹¤..
 
 	return true;
 }
@@ -86,7 +76,7 @@ bool CN3VMesh::Save(HANDLE hFile)
 
 	DWORD dwRWC = 0;
 
-	WriteFile(hFile, &m_nVC, 4, &dwRWC, NULL); // Á¡°¹¼ö ÀĞ±â..
+	WriteFile(hFile, &m_nVC, 4, &dwRWC, NULL); // ì ê°¯ìˆ˜ ì½ê¸°..
 	if(m_nVC > 0) 
 	{
 		WriteFile(hFile, m_pVertices, m_nVC * sizeof(__Vector3), &dwRWC, NULL);
@@ -95,7 +85,7 @@ bool CN3VMesh::Save(HANDLE hFile)
 	WriteFile(hFile, &m_nIC, 4, &dwRWC, NULL); // Index Count..
 	if(m_nIC > 0)
 	{
-		WriteFile(hFile, m_pwIndices, m_nIC * 2, &dwRWC, NULL); // Index Buffer µ¥ÀÌÅÍ ¾²±â..
+		WriteFile(hFile, m_pwIndices, m_nIC * 2, &dwRWC, NULL); // Index Buffer ë°ì´í„° ì“°ê¸°..
 	}
 
 	return true;
@@ -120,7 +110,7 @@ void CN3VMesh::CreateVertices(int nVC)
 		m_pVertices = new __Vector3[nVC];
 	}
 
-	memset(m_pVertices, 0, nVC * sizeof(__Vector3)); // Vertex Buffer »ı¼º
+	memset(m_pVertices, 0, nVC * sizeof(__Vector3)); // Vertex Buffer ìƒì„±
 	m_nVC = nVC;
 }
 
@@ -135,7 +125,7 @@ void CN3VMesh::CreateIndex(int nIC)
 
 	delete [] m_pwIndices;
 	m_pwIndices = new WORD[nIC];
-	memset(m_pwIndices, 0, nIC * 2); // Index Buffer »ı¼º
+	memset(m_pwIndices, 0, nIC * 2); // Index Buffer ìƒì„±
 	m_nIC = nIC;
 }
 
@@ -167,7 +157,7 @@ void CN3VMesh::CreateCube(const __Vector3 &vMin, const __Vector3 &vMax)
 	m_pwIndices[30] = 3; m_pwIndices[31] = 2; m_pwIndices[32] = 7;
 	m_pwIndices[33] = 3; m_pwIndices[34] = 7; m_pwIndices[35] = 6;
 
-	this->FindMinMax(); // Áß½ÉÁ¡°ú ¹İÁö¸§À» °è»êÇØ ÁØ´Ù..
+	this->FindMinMax(); // ì¤‘ì‹¬ì ê³¼ ë°˜ì§€ë¦„ì„ ê³„ì‚°í•´ ì¤€ë‹¤..
 }
 
 
@@ -238,7 +228,7 @@ void CN3VMesh::FindMinMax()
 		if(m_pVertices[i].z > m_vMax.z) m_vMax.z = m_pVertices[i].z;
 	}
 
-	// ÃÖ´ë ÃÖ¼Ò°ªÀ» °®°í ¹İÁö¸§ °è»êÇÑ´Ù..
+	// ìµœëŒ€ ìµœì†Œê°’ì„ ê°–ê³  ë°˜ì§€ë¦„ ê³„ì‚°í•œë‹¤..
 	m_fRadius  = (m_vMax - m_vMin).Magnitude() * 0.5f;
 }
 
@@ -271,17 +261,17 @@ bool CN3VMesh::CheckCollision(const __Matrix44& MtxWorld, const __Vector3& v0, c
 		if(m_nIC > 0) { nCI0 = m_pwIndices[i*3+0]; nCI1 = m_pwIndices[i*3+1]; nCI2 = m_pwIndices[i*3+2]; }
 		else { nCI0 = i*3; nCI1 = i*3+1; nCI2 = i*3+2; }
 
-		if(false == ::_IntersectTriangle(vPos0, vDir, m_pVertices[nCI0], m_pVertices[nCI1], m_pVertices[nCI2], fT, fU, fV, &vColTmp)) continue; // Ã¹Â° º¤ÅÍ°¡ °ÉÄ¡¸é..
-		if(false == ::_IntersectTriangle(vPos1, vDir, m_pVertices[nCI0], m_pVertices[nCI1], m_pVertices[nCI2])) // µÑÂ°´Â ¾È °ÉÄ¡¸é..
+		if(false == ::_IntersectTriangle(vPos0, vDir, m_pVertices[nCI0], m_pVertices[nCI1], m_pVertices[nCI2], fT, fU, fV, &vColTmp)) continue; // ì²«ì§¸ ë²¡í„°ê°€ ê±¸ì¹˜ë©´..
+		if(false == ::_IntersectTriangle(vPos1, vDir, m_pVertices[nCI0], m_pVertices[nCI1], m_pVertices[nCI2])) // ë‘˜ì§¸ëŠ” ì•ˆ ê±¸ì¹˜ë©´..
 		{
-			fDistTmp = (vPos0 - vColTmp).Magnitude(); // °Å¸®¸¦ Àçº¸°í..
+			fDistTmp = (vPos0 - vColTmp).Magnitude(); // ê±°ë¦¬ë¥¼ ì¬ë³´ê³ ..
 			if(fDistTmp < fDistClosest) 
 			{
 				fDistClosest = fDistTmp;
 				
 				if(pVCol) *pVCol = vColTmp * MtxWorld;
 
-				// ¹ı¼± º¤ÅÍ ±¸ÇÏ±â..
+				// ë²•ì„  ë²¡í„° êµ¬í•˜ê¸°..
 				if(pVNormal)
 				{
 					(*pVNormal).Cross(m_pVertices[nCI1] - m_pVertices[nCI0], m_pVertices[nCI2] - m_pVertices[nCI1]);
@@ -293,10 +283,10 @@ bool CN3VMesh::CheckCollision(const __Matrix44& MtxWorld, const __Vector3& v0, c
 	}
 	if(fDistClosest != FLT_MAX) return true;
 
-	//µÎÁ¡ÀÌ Ãæµ¹¸Ş½Ã ¾È¿¡ ÀÖ´Â °æ¿ì..by lynus..
+	//ë‘ì ì´ ì¶©ëŒë©”ì‹œ ì•ˆì— ìˆëŠ” ê²½ìš°..by lynus..
 	__Vector3 tmpNormal;
 	float d;
-	for(i = 0; i < nFC; i++)
+	for(auto i = 0; i < nFC; i++)
 	{
 		if(m_nIC > 0) { nCI0 = m_pwIndices[i*3+0]; nCI1 = m_pwIndices[i*3+1]; nCI2 = m_pwIndices[i*3+2]; }
 		else { nCI0 = i*3; nCI1 = i*3+1; nCI2 = i*3+2; }
@@ -335,7 +325,7 @@ bool CN3VMesh::Pick(const __Matrix44& MtxWorld, const __Vector3& vPos, const __V
 
 		if(false == ::_IntersectTriangle(vPos2, vDir2, m_pVertices[nCI0], m_pVertices[nCI1], m_pVertices[nCI2])) continue;
 
-		// Ãæµ¹ÀÌ´Ù..
+		// ì¶©ëŒì´ë‹¤..
 		if(pVCol)
 		{
 			float fT, fU, fV;
@@ -343,7 +333,7 @@ bool CN3VMesh::Pick(const __Matrix44& MtxWorld, const __Vector3& vPos, const __V
 			(*pVCol) *= MtxWorld;
 		}
 
-		// ¹ı¼± º¤ÅÍ ±¸ÇÏ±â..
+		// ë²•ì„  ë²¡í„° êµ¬í•˜ê¸°..
 		if(pVNormal)
 		{
 			(*pVNormal).Cross(m_pVertices[nCI1] - m_pVertices[nCI0], m_pVertices[nCI2] - m_pVertices[nCI1]);
@@ -368,14 +358,14 @@ bool CN3VMesh::Import(CN3IMesh *pIMesh)
 	this->Release();
 	this->CreateVertices(nFC * 3);
 
-	for(int i = 0; i < nFC; i++) // Normal °ª ´Ù½Ã ¼¼ÆÃ..
+	for(int i = 0; i < nFC; i++) // Normal ê°’ ë‹¤ì‹œ ì„¸íŒ…..
 	{
 		m_pVertices[i*3+0] = pvSrc[i*3+0];
 		m_pVertices[i*3+1] = pvSrc[i*3+1];
 		m_pVertices[i*3+2] = pvSrc[i*3+2];
 	}
 
-	m_szName = pIMesh->m_szName; // ÀÌ¸§..
+	m_szName = pIMesh->m_szName; // ì´ë¦„..
 	return true;
 }
 #endif // end of _N3TOOL

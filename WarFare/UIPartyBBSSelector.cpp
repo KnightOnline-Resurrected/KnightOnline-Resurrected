@@ -9,16 +9,6 @@
 #include "PacketDef.h"
 #include "APISocket.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 CUIPartyBBSSelector::CUIPartyBBSSelector()
 {
 	m_pBtn_WantPartyMember	= NULL;
@@ -78,7 +68,7 @@ void CUIPartyBBSSelector::MsgSend_PartyBBSKind(BYTE byKind)
 	BYTE byBuff[4];											
 	int iOffset=0;											
 
-	CAPISocket::MP_AddByte(byBuff, iOffset, 1);		// ÆĞÅ¶µµ Á¤ÇØ¾ß ÇÒµí
-	CAPISocket::MP_AddByte(byBuff, iOffset, byKind);		// ÆÄÆ¼±¸ÇÔÀÎÁö ÆÄÆ¼¿ø ±¸ÇÔÀÎÁö...
-	CGameProcedure::s_pSocket->Send(byBuff, iOffset);		// ÆĞÅ¶À» º¸³¿..
+	CAPISocket::MP_AddByte(byBuff, iOffset, 1);		// íŒ¨í‚·ë„ ì •í•´ì•¼ í• ë“¯
+	CAPISocket::MP_AddByte(byBuff, iOffset, byKind);		// íŒŒí‹°êµ¬í•¨ì¸ì§€ íŒŒí‹°ì› êµ¬í•¨ì¸ì§€...
+	CGameProcedure::s_pSocket->Send(byBuff, iOffset);		// íŒ¨í‚·ì„ ë³´ëƒ„..
 }

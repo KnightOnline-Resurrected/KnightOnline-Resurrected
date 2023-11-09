@@ -10,16 +10,6 @@
 #include "N3SndMgr.h"
 #include "N3SndObj.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 CN3UIStatic::CN3UIStatic()
 {
 	m_eType = UI_TYPE_STATIC;
@@ -65,7 +55,7 @@ bool CN3UIStatic::Load(HANDLE hFile)
 {
 	if (false == CN3UIBase::Load(hFile)) return false;
 
-	// m_pImageBkGnd,  m_pBuffOutRef ¼³Á¤ÇÏ±â
+	// m_pImageBkGnd,  m_pBuffOutRef ì„¤ì •í•˜ê¸°
 	for(UIListItor itor = m_Children.begin(); m_Children.end() != itor; ++itor)
 	{
 		CN3UIBase* pChild = (*itor);
@@ -79,17 +69,17 @@ bool CN3UIStatic::Load(HANDLE hFile)
 		}
 	}
 	
-	// ÀÌÀü uifÆÄÀÏÀ» ÄÁ¹öÆÃ ÇÏ·Á¸é »ç¿îµå ·Îµå ÇÏ´Â ºÎºĞ ¸·±â
+	// ì´ì „ uifíŒŒì¼ì„ ì»¨ë²„íŒ… í•˜ë ¤ë©´ ì‚¬ìš´ë“œ ë¡œë“œ í•˜ëŠ” ë¶€ë¶„ ë§‰ê¸°
 	int iSndFNLen = 0;
 	DWORD dwNum;
-	ReadFile(hFile, &iSndFNLen, sizeof(iSndFNLen), &dwNum, NULL);		//	»ç¿îµå ÆÄÀÏ ¹®ÀÚ¿­ ±æÀÌ
+	ReadFile(hFile, &iSndFNLen, sizeof(iSndFNLen), &dwNum, NULL);		//	ì‚¬ìš´ë“œ íŒŒì¼ ë¬¸ìì—´ ê¸¸ì´
 	if (iSndFNLen>0)
 	{
 		std::vector<char> buffer(iSndFNLen+1, NULL);
-		ReadFile(hFile, buffer.begin(), iSndFNLen, &dwNum, NULL);
+		ReadFile(hFile, buffer.data(), iSndFNLen, &dwNum, NULL);
 
 		__ASSERT(NULL == m_pSnd_Click, "memory leak");
-		m_pSnd_Click = s_SndMgr.CreateObj(buffer.begin(), SNDTYPE_2D);
+		m_pSnd_Click = s_SndMgr.CreateObj(buffer.data(), SNDTYPE_2D);
 	}
 
 	return true;
@@ -112,11 +102,11 @@ DWORD CN3UIStatic::MouseProc(DWORD dwFlags, const POINT& ptCur, const POINT& ptO
 	DWORD dwRet = UI_MOUSEPROC_NONE;
 	if (!m_bVisible) return dwRet;
 
-	if((dwFlags & UI_MOUSE_LBCLICK) && IsIn(ptCur.x, ptCur.y))  // ¿ŞÂÊ¹öÆ° ´­¸£´Â ¼ø°£ ¿µ¿ª ¾ÈÀÌ¸é
+	if((dwFlags & UI_MOUSE_LBCLICK) && IsIn(ptCur.x, ptCur.y))  // ì™¼ìª½ë²„íŠ¼ ëˆŒë¥´ëŠ” ìˆœê°„ ì˜ì—­ ì•ˆì´ë©´
 	{
-		if (m_pSnd_Click) m_pSnd_Click->Play();	// »ç¿îµå°¡ ÀÖÀ¸¸é playÇÏ±â
+		if (m_pSnd_Click) m_pSnd_Click->Play();	// ì‚¬ìš´ë“œê°€ ìˆìœ¼ë©´ playí•˜ê¸°
 
-		if(m_pParent) m_pParent->ReceiveMessage(this, UIMSG_BUTTON_CLICK); // ºÎ¸ğ¿¡°Ô ¹öÆ° Å¬¸¯ ÅëÁö..
+		if(m_pParent) m_pParent->ReceiveMessage(this, UIMSG_BUTTON_CLICK); // ë¶€ëª¨ì—ê²Œ ë²„íŠ¼ í´ë¦­ í†µì§€..
 		dwRet |= (UI_MOUSEPROC_DONESOMETHING|UI_MOUSEPROC_INREGION);
 		return dwRet;
 	}
@@ -132,7 +122,7 @@ void CN3UIStatic::operator = (const CN3UIStatic& other)
 
 	SetSndClick(other.GetSndFName_Click());
 
-	// m_pImageBkGnd,  m_pBuffOutRef ¼³Á¤ÇÏ±â
+	// m_pImageBkGnd,  m_pBuffOutRef ì„¤ì •í•˜ê¸°
 	for(UIListItor itor = m_Children.begin(); m_Children.end() != itor; ++itor)
 	{
 		CN3UIBase* pChild = (*itor);
@@ -154,7 +144,7 @@ bool CN3UIStatic::Save(HANDLE hFile)
 	DWORD dwNum;
 	int iSndFNLen = 0;
 	if (m_pSnd_Click) iSndFNLen = m_pSnd_Click->m_szFileName.size();
-	WriteFile(hFile, &iSndFNLen, sizeof(iSndFNLen), &dwNum, NULL);		//	»ç¿îµå ÆÄÀÏ ¹®ÀÚ¿­ ±æÀÌ
+	WriteFile(hFile, &iSndFNLen, sizeof(iSndFNLen), &dwNum, NULL);		//	ì‚¬ìš´ë“œ íŒŒì¼ ë¬¸ìì—´ ê¸¸ì´
 	if (iSndFNLen>0) WriteFile(hFile, m_pSnd_Click->m_szFileName.c_str(), iSndFNLen, &dwNum, NULL);
 	return true;
 }
@@ -165,8 +155,8 @@ void CN3UIStatic::CreateImageAndString()
 	m_pImageBkGnd->Init(this);
 	m_pImageBkGnd->SetRegion(m_rcRegion);
 
-	m_pBuffOutRef = new CN3UIString();		// È­¸é¿¡ Ç¥½ÃÇÒ ui string »ı¼ºÇÏ°í 
-	m_pBuffOutRef->Init(this);				// ÃÊ±âÈ­(ÀÚµ¿À¸·Î children list µé¾î°£´Ù.)
+	m_pBuffOutRef = new CN3UIString();		// í™”ë©´ì— í‘œì‹œí•  ui string ìƒì„±í•˜ê³  
+	m_pBuffOutRef->Init(this);				// ì´ˆê¸°í™”(ìë™ìœ¼ë¡œ children list ë“¤ì–´ê°„ë‹¤.)
 	m_pImageBkGnd->SetRegion(m_rcRegion);
 }
 
@@ -181,7 +171,7 @@ void CN3UIStatic::SetSndClick(const std::string& strFileName)
 	if (0 == strFileName.size()) return;
 
 	CN3BaseFileAccess tmpBase;
-	tmpBase.FileNameSet(strFileName);	// Base°æ·Î¿¡ ´ëÇØ¼­ »ó´ëÀû °æ·Î¸¦ ³Ñ°ÜÁØ´Ù.
+	tmpBase.FileNameSet(strFileName);	// Baseê²½ë¡œì— ëŒ€í•´ì„œ ìƒëŒ€ì  ê²½ë¡œë¥¼ ë„˜ê²¨ì¤€ë‹¤.
 
 	SetCurrentDirectory(tmpBase.PathGet().c_str());
 	m_pSnd_Click = s_SndMgr.CreateObj(tmpBase.FileName(), SNDTYPE_2D);

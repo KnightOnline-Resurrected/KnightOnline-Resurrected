@@ -4,21 +4,11 @@
 #include "StdAfxBase.h"
 #include "N3AnimKey.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 CN3AnimKey::CN3AnimKey()
 {
 	m_eType = KEY_VECTOR3;
 
-	m_nCount = 0; // ≈∞ ƒ´øÓ∆Æ
+	m_nCount = 0; // ÌÇ§ Ïπ¥Ïö¥Ìä∏
 	m_fSamplingRate = 30.0;
 	m_pDatas = NULL;
 }
@@ -30,7 +20,7 @@ CN3AnimKey::~CN3AnimKey()
 
 void CN3AnimKey::Release()
 {
-	m_nCount = 0; // ≈∞ ƒ´øÓ∆Æ
+	m_nCount = 0; // ÌÇ§ Ïπ¥Ïö¥Ìä∏
 	m_fSamplingRate = 30.0;
 	delete [] m_pDatas; m_pDatas = NULL;
 
@@ -43,7 +33,7 @@ void CN3AnimKey::Alloc(int nCount, float fSamplingRate, ANIMATION_KEY_TYPE eType
 	if(KEY_VECTOR3 != eType && KEY_QUATERNION != eType) return;
 	if(fSamplingRate <= 0.0f)
 	{
-		__ASSERT(0, "Animation Sampling Rate ¥¬ π›µÂΩ√ 0 ∫∏¥Ÿ ƒøæﬂ «’¥œ¥Ÿ.");
+		__ASSERT(0, "Animation Sampling Rate Îäî Î∞òÎìúÏãú 0 Î≥¥Îã§ Ïª§Ïïº Ìï©ÎãàÎã§.");
 		return;
 	}
 
@@ -59,12 +49,12 @@ void CN3AnimKey::Alloc(int nCount, float fSamplingRate, ANIMATION_KEY_TYPE eType
 
 	if(KEY_VECTOR3 == m_eType)
 	{
-		m_pDatas = new __Vector3[nCount+1]; // «—∞≥ ¥ı ø©¿Ø¿÷∞‘ «“¥Á.
+		m_pDatas = new __Vector3[nCount+1]; // ÌïúÍ∞ú Îçî Ïó¨Ïú†ÏûàÍ≤å Ìï†Îãπ.
 		memset(m_pDatas, 0, sizeof(__Vector3) * (nCount+1));
 	}
 	else if(KEY_QUATERNION == m_eType)
 	{
-		m_pDatas = new __Quaternion[nCount+1]; // «—∞≥ ¥ı ø©¿Ø¿÷∞‘ «“¥Á.
+		m_pDatas = new __Quaternion[nCount+1]; // ÌïúÍ∞ú Îçî Ïó¨Ïú†ÏûàÍ≤å Ìï†Îãπ.
 		memset(m_pDatas, 0, sizeof(__Quaternion) * (nCount+1));
 	}
 }
@@ -74,9 +64,9 @@ bool CN3AnimKey::Load(HANDLE hFile)
 	if(m_nCount > 0) this->Release();
 
 	DWORD dwRWC = 0;
-	ReadFile(hFile, &m_nCount, 4, &dwRWC, NULL); // ≈∞∞° ∏Ó∞≥ ¿÷¥¬¡ˆ
+	ReadFile(hFile, &m_nCount, 4, &dwRWC, NULL); // ÌÇ§Í∞Ä Î™áÍ∞ú ÏûàÎäîÏßÄ
 
-	// ≈∞∞™¿ª ∆ƒ¿œø°º≠ ¿–±‚..
+	// ÌÇ§Í∞íÏùÑ ÌååÏùºÏóêÏÑú ÏùΩÍ∏∞..
 	if(m_nCount > 0)
 	{
 		ReadFile(hFile, &m_eType, 4, &dwRWC, NULL); // Key Type
@@ -86,13 +76,13 @@ bool CN3AnimKey::Load(HANDLE hFile)
 		if(KEY_VECTOR3 == m_eType)
 		{
 			ReadFile(hFile, m_pDatas, sizeof(__Vector3)*m_nCount, &dwRWC, NULL);
-			__Vector3* pKeys = (__Vector3*)m_pDatas; // ≥°ø° «œ≥™¥ı ∫πªÁ«ÿ¡ÿ¥Ÿ.
+			__Vector3* pKeys = (__Vector3*)m_pDatas; // ÎÅùÏóê ÌïòÎÇòÎçî Î≥µÏÇ¨Ìï¥Ï§ÄÎã§.
 			pKeys[m_nCount] = pKeys[m_nCount-1];
 		}
 		else if(KEY_QUATERNION == m_eType)
 		{
 			ReadFile(hFile, m_pDatas, sizeof(__Quaternion)*m_nCount, &dwRWC, NULL);
-			__Quaternion* pKeys = (__Quaternion*)m_pDatas; // ≥°ø° «œ≥™¥ı ∫πªÁ«ÿ¡ÿ¥Ÿ.
+			__Quaternion* pKeys = (__Quaternion*)m_pDatas; // ÎÅùÏóê ÌïòÎÇòÎçî Î≥µÏÇ¨Ìï¥Ï§ÄÎã§.
 			pKeys[m_nCount] = pKeys[m_nCount-1];
 		}
 	}
@@ -104,7 +94,7 @@ bool CN3AnimKey::Load(HANDLE hFile)
 bool CN3AnimKey::Save(HANDLE hFile)
 {
 	DWORD dwRWC = 0;
-	WriteFile(hFile, &m_nCount, 4, &dwRWC, NULL); // ≈∞∞° ∏Ó∞≥ ¿÷¥¬¡ˆ
+	WriteFile(hFile, &m_nCount, 4, &dwRWC, NULL); // ÌÇ§Í∞Ä Î™áÍ∞ú ÏûàÎäîÏßÄ
 
 	if(m_nCount > 0)
 	{
@@ -140,7 +130,7 @@ void CN3AnimKey::Add(CN3AnimKey &AKSrc, int nIndexS, int nIndexE)
 	if(nIndexE < nIndexS) return;
 	if(this->Type() != AKSrc.Type()) return;
 
-	int nAddCount = nIndexE - nIndexS + 1; // √ﬂ∞°«“ ∞πºˆ
+	int nAddCount = nIndexE - nIndexS + 1; // Ï∂îÍ∞ÄÌï† Í∞ØÏàò
 
 	int nPrevCount = m_nCount;
 	void* pVBackup = NULL;
@@ -158,22 +148,22 @@ void CN3AnimKey::Add(CN3AnimKey &AKSrc, int nIndexS, int nIndexE)
 		}
 	}
 
-	this->Alloc(nPrevCount + nAddCount, AKSrc.SamplingRate(), AKSrc.Type()); // ªı∑Œ «“¥Á.
+	this->Alloc(nPrevCount + nAddCount, AKSrc.SamplingRate(), AKSrc.Type()); // ÏÉàÎ°ú Ìï†Îãπ.
 	if(nPrevCount > 0)
 	{
 		if(KEY_VECTOR3 == m_eType)
 		{
-			memcpy(m_pDatas, pVBackup, sizeof(__Vector3) * nPrevCount); // πÈæ˜πﬁ¿∫∞… restore
+			memcpy(m_pDatas, pVBackup, sizeof(__Vector3) * nPrevCount); // Î∞±ÏóÖÎ∞õÏùÄÍ±∏ restore
 		}
 		else if(KEY_QUATERNION == m_eType)
 		{
-			memcpy(m_pDatas, pVBackup, sizeof(__Quaternion) * nPrevCount); // πÈæ˜πﬁ¿∫∞… restore
+			memcpy(m_pDatas, pVBackup, sizeof(__Quaternion) * nPrevCount); // Î∞±ÏóÖÎ∞õÏùÄÍ±∏ restore
 		}
 	}
 
 	if(KEY_VECTOR3 == m_eType)
 	{
-		for(int i = 0; i < nAddCount; i++) // √ﬂ∞°.
+		for(int i = 0; i < nAddCount; i++) // Ï∂îÍ∞Ä.
 		{
 			__Vector3* pvTmp = (__Vector3*)AKSrc.DataGet(nIndexS + i);
 			if(pvTmp) ((__Vector3*)m_pDatas)[nPrevCount + i] = *pvTmp;
@@ -182,7 +172,7 @@ void CN3AnimKey::Add(CN3AnimKey &AKSrc, int nIndexS, int nIndexE)
 	}
 	else if(KEY_QUATERNION == m_eType)
 	{
-		for(int i = 0; i < nAddCount; i++) // √ﬂ∞°.
+		for(int i = 0; i < nAddCount; i++) // Ï∂îÍ∞Ä.
 		{
 			__Quaternion* pvTmp = (__Quaternion*)AKSrc.DataGet(nIndexS + i);
 			if(pvTmp) ((__Quaternion*)m_pDatas)[nPrevCount + i] = *pvTmp;
@@ -206,7 +196,7 @@ void CN3AnimKey::Duplicate(CN3AnimKey* pSrc)
 
 	m_nCount = pSrc->Count();
 
-	// ≈∞∞™¿ª ∆ƒ¿œø°º≠ ¿–±‚..
+	// ÌÇ§Í∞íÏùÑ ÌååÏùºÏóêÏÑú ÏùΩÍ∏∞..
 	if(m_nCount > 0)
 	{
 		m_eType = pSrc->Type();

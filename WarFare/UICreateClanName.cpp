@@ -13,17 +13,6 @@
 
 #include "../N3Base/StdAfxBase.h"
 
-
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 CUICreateClanName::CUICreateClanName()
 {
 }
@@ -79,8 +68,8 @@ void CUICreateClanName::MsgSend_MakeClan()
 {
 	int iLn = 20;
 	iLn = m_szClanName.size();
-	BYTE byBuff[40];									// ∆–≈∂ πˆ∆€..
-	int iOffset=0;										// ∆–≈∂ ø¿«¡º¬..
+	BYTE byBuff[40];									// Ìå®ÌÇ∑ Î≤ÑÌçº..
+	int iOffset=0;										// Ìå®ÌÇ∑ Ïò§ÌîÑÏÖã..
 	CAPISocket::MP_AddByte(byBuff, iOffset, N3_KNIGHTS);		
 	CAPISocket::MP_AddByte(byBuff, iOffset, N3_SP_KNIGHTS_CREATE);
 	CAPISocket::MP_AddShort(byBuff, iOffset, (BYTE)iLn);

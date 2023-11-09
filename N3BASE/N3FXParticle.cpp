@@ -6,16 +6,6 @@
 #include "N3FXParticle.h"
 #include "N3FXPartParticles.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 CN3FXParticle::CN3FXParticle()
 {
 	m_fLife = 0.0f;
@@ -63,7 +53,7 @@ bool CN3FXParticle::Tick()
 	if(!m_pRefParent->m_bChangeColor && m_fCurrLife >= (m_pRefParent->m_fFadeIn + m_fLife + m_pRefParent->m_fFadeOut)) return false;
 
 	///////////////////////////////////////////////
-	//ÇöÀçÃ³¸®..
+	//í˜„ìž¬ì²˜ë¦¬..
 	__Quaternion qt;
 	qt.RotationAxis(m_vAxis, m_fRot);
 
@@ -96,7 +86,7 @@ bool CN3FXParticle::Tick()
 	}
 	
 	///////////////////////////////////////////////
-	//´ÙÀ½ÁØºñ..
+	//ë‹¤ìŒì¤€ë¹„..
 	m_vLcPos += m_vVelocity * CN3Base::s_fSecPerFrm;
 
 	if(m_pRefParent->m_bChangeColor)
@@ -124,7 +114,7 @@ bool CN3FXParticle::Tick()
 		else m_dwColor = 0x00ffffff;
 	}
 
-	for(i=0;i<NUM_VERTEX_PARTICLE;i++) m_pVB[i].color = m_dwColor;
+	for(auto i=0;i<NUM_VERTEX_PARTICLE;i++) m_pVB[i].color = m_dwColor;
 
 	m_vVelocity += m_vAccel * CN3Base::s_fSecPerFrm;
 	m_fRot += CN3Base::s_fSecPerFrm*m_pRefParent->m_fPtRotVelocity;

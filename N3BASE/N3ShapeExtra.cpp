@@ -5,12 +5,6 @@
 #include "StdAfxBase.h"
 #include "N3ShapeExtra.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
 CN3ShapeExtra::CN3ShapeExtra()
 {
 	m_dwType |= OBJ_SHAPE_EXTRA;
@@ -36,7 +30,7 @@ bool CN3ShapeExtra::Load(HANDLE hFile)
 	m_Rotations.clear();
 	if(iPC <= 0) return bSuccess;
 
-	m_Rotations.assign(iPC);
+	m_Rotations.reserve(iPC);
 
 	return bSuccess;
 }
@@ -46,7 +40,7 @@ void CN3ShapeExtra::Tick(float fFrm)
 	if(false == m_bVisible) 
 	{
 		m_bDontRender = true;
-		return; // °­Á¦·Î ·»´õ¸µ ÇÏÁö ¾Ê´Â´Ù.
+		return; // ê°•ì œë¡œ ë Œë”ë§ í•˜ì§€ ì•ŠëŠ”ë‹¤.
 	}
 
 	CN3Shape::Tick();
@@ -67,11 +61,11 @@ void CN3ShapeExtra::Tick(float fFrm)
 		__Rotation* pRot = &(m_Rotations[i]);
 		if(	pRot->fRadianPerSec == 0 || 
 			pRot->fRadianCur == pRot->fRadianToReach) continue;
-		(pRot->fRadianCur < pRot->fRadianToReach) ? fDir = 1.0f : fDir = -1.0f; // µµ´Â ¹æÇâ..
+		(pRot->fRadianCur < pRot->fRadianToReach) ? fDir = 1.0f : fDir = -1.0f; // ë„ëŠ” ë°©í–¥..
 		
 		fRotDelta = pRot->fRadianPerSec * fDir * CN3Base::s_fSecPerFrm;
 		pRot->fRadianCur += fRotDelta;
-		if(T_Abs(pRot->fRadianToReach - pRot->fRadianCur) <= fRotDelta) /// ¿øÇÏ´Â °÷±îÁö ´Ù ¿­·È´Ù!!
+		if(T_Abs(pRot->fRadianToReach - pRot->fRadianCur) <= fRotDelta) /// ì›í•˜ëŠ” ê³³ê¹Œì§€ ë‹¤ ì—´ë ¸ë‹¤!!
 		{
 			bNeedRemakeCollisionMeshes = true;
 			pRot->fRadianPerSec = 0;
@@ -85,7 +79,7 @@ void CN3ShapeExtra::Tick(float fFrm)
 	}
 
 	if(bNeedRemakeCollisionMeshes) 
-		this->MakeCollisionMeshByParts(); // Ãæµ¹¸Ş½Ã¸¦ ´Ù½Ã ¸¸µç´Ù..
+		this->MakeCollisionMeshByParts(); // ì¶©ëŒë©”ì‹œë¥¼ ë‹¤ì‹œ ë§Œë“ ë‹¤..
 }
 
 void CN3ShapeExtra::RotateTo(int iPart, const __Vector3& vAxis, float fRadianToReach, float fRadianPerSec, bool bImmediately)
@@ -97,5 +91,5 @@ void CN3ShapeExtra::RotateTo(int iPart, const __Vector3& vAxis, float fRadianToR
 	pRot->fRadianToReach = fRadianToReach;
 	pRot->fRadianPerSec = fRadianPerSec;
 	pRot->vAxis = vAxis;
-	if(bImmediately) pRot->fRadianCur = pRot->fRadianToReach - 0.01f; // ÀÌ·¯¸é Á÷»§À¸·Î ¿­¸°´Ù.. ¾à°£ °ªÀ» »©ÁÖ´Â ÀÌÀ¯´Â ÇÑ¹øÀº Æ½À» µ¹°Ô ÇÏ±â À§ÇØ¼­ÀÌ´Ù.
+	if(bImmediately) pRot->fRadianCur = pRot->fRadianToReach - 0.01f; // ì´ëŸ¬ë©´ ì§ë¹µìœ¼ë¡œ ì—´ë¦°ë‹¤.. ì•½ê°„ ê°’ì„ ë¹¼ì£¼ëŠ” ì´ìœ ëŠ” í•œë²ˆì€ í‹±ì„ ëŒê²Œ í•˜ê¸° ìœ„í•´ì„œì´ë‹¤.
 }

@@ -5,16 +5,6 @@
 #include "stdafxBase.h"
 #include "N3Star.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 CN3Star::CN3Star()
 {
 	m_iCurNumStar = 0;
@@ -36,7 +26,7 @@ void CN3Star::Release()
 
 void CN3Star::Tick()
 {
-	// º°ÀÌ Á¡Á¡ ´Ã¾î³ª°í ÁÙ¾îµå´Â°Í Á¶Á¤ÇÏ±â
+	// ë³„ì´ ì ì  ëŠ˜ì–´ë‚˜ê³  ì¤„ì–´ë“œëŠ”ê²ƒ ì¡°ì •í•˜ê¸°
 	static float fSec = 0.0f;
 	if (0.0f == m_fAddTime) return;
 

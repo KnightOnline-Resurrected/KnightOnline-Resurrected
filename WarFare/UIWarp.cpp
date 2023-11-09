@@ -14,23 +14,13 @@
 
 #include "UIManager.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 CUIWarp::CUIWarp()
 {
 	m_pBtn_Ok = NULL;
 	m_pBtn_Cancel = NULL;
 	
 	m_pList_Infos = NULL;
-	m_pText_Agreement = NULL; // µ¿ÀÇ »çÇ×..
+	m_pText_Agreement = NULL; // ë™ì˜ ì‚¬í•­..
 }
 
 CUIWarp::~CUIWarp()
@@ -67,7 +57,7 @@ bool CUIWarp::ReceiveMessage(CN3UIBase* pSender, DWORD dwMsg)
 	{
 		if(pSender == m_pList_Infos)
 		{
-			this->UpdateAgreement(); // µ¿ÀÇ¹® ¾÷µ¥ÀÌÆ®..
+			this->UpdateAgreement(); // ë™ì˜ë¬¸ ì—…ë°ì´íŠ¸..
 		}
 	}
 

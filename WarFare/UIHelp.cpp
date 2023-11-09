@@ -7,16 +7,6 @@
 #include "GameProcedure.h"
 #include "UIManager.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 CUIHelp::CUIHelp()
 {
 	m_pBtn_Close = NULL;
@@ -82,7 +72,7 @@ bool CUIHelp::ReceiveMessage(CN3UIBase* pSender, DWORD dwMsg)
 
 		if(iPagePrev != iPage)
 		{
-			for(i = 0; i < MAX_HELP_PAGE; i++)
+			for(auto i = 0; i < MAX_HELP_PAGE; i++)
 			{
 				if(NULL == m_pPages[i]) continue;
 

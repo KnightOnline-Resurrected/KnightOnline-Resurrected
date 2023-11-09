@@ -19,16 +19,6 @@
 #include "GameEng.h"
 #include "../N3Base/N3Camera.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-/////////////////////////////////////////
-// Construction/Destruction
-/////////////////////////////////////////
-
 CN3FXBundleGame::CN3FXBundleGame()
 {
 	m_iIdx = 0;
@@ -263,7 +253,7 @@ bool CN3FXBundleGame::Tick()
 					m_vPos += m_vDir*CN3Base::s_fSecPerFrm*m_fVelocity;
 					
 					float fTerrainY = s_pTerrain->GetHeight(m_vPos.x, m_vPos.z);
-					if(m_vPos.y <= fTerrainY) m_vPos.y = fTerrainY + 0.3f;	//¶¥À» Å¸°í ³¯¶ó°¡¶ó..
+					if(m_vPos.y <= fTerrainY) m_vPos.y = fTerrainY + 0.3f;	//ë•…ì„ íƒ€ê³  ë‚ ë¼ê°€ë¼..
 					break;
 					*/
 				}
@@ -301,7 +291,7 @@ bool CN3FXBundleGame::Tick()
 				m_vPos += m_vDir*CN3Base::s_fSecPerFrm*m_fVelocity;
 
 				//float fTerrainY = s_pTerrain->GetHeight(m_vPos.x, m_vPos.z);
-				//if(m_vPos.y <= fTerrainY) m_vPos.y = fTerrainY + 0.3f;	//¶¥À» Å¸°í ³¯¶ó°¡¶ó..
+				//if(m_vPos.y <= fTerrainY) m_vPos.y = fTerrainY + 0.3f;	//ë•…ì„ íƒ€ê³  ë‚ ë¼ê°€ë¼..
 				break;
 			}
 
@@ -325,7 +315,7 @@ bool CN3FXBundleGame::Tick()
 			}
 		case FX_BUNDLE_REGION_POISON:
 			{
-				CN3Camera* pCamera = CGameProcedure::s_pEng->CameraGetActive();		// È°¼ºÈ­µÈ Ä«¸Þ¶ó ¾ò±â..
+				CN3Camera* pCamera = CGameProcedure::s_pEng->CameraGetActive();		// í™œì„±í™”ëœ ì¹´ë©”ë¼ ì–»ê¸°..
 
 				__Vector3 vEyePos = pCamera->EyePos();
 				__Vector3 vEyeAt  = pCamera->AtPos();

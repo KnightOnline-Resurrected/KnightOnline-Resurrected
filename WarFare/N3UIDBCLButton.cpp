@@ -7,16 +7,6 @@
 #include "GameProcedure.h"
 #include "UIImageTooltipDlg.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 CN3UIDBCLButton::CN3UIDBCLButton()
 {
 	CN3UIImage::CN3UIImage();
@@ -31,7 +21,7 @@ DWORD CN3UIDBCLButton::MouseProc(DWORD dwFlags, const POINT& ptCur, const POINT&
 	DWORD dwRet = UI_MOUSEPROC_NONE;
 
 	RECT rect = GetRegion();
-	if(!::PtInRect(&rect, ptCur))		// ¿µ¿ª ¹ÛÀÌ¸é
+	if(!::PtInRect(&rect, ptCur))		// ì˜ì—­ ë°–ì´ë©´
 	{
 		dwRet |= CN3UIBase::MouseProc(dwFlags, ptCur, ptOld);
 		return dwRet;
@@ -39,7 +29,7 @@ DWORD CN3UIDBCLButton::MouseProc(DWORD dwFlags, const POINT& ptCur, const POINT&
 
 	if (dwFlags & UI_MOUSE_LBDBLCLK)
 	{
-		m_pParent->ReceiveMessage(this, UIMSG_ICON_DBLCLK); // ºÎ¸ğ¿¡°Ô ¹öÆ° Å¬¸¯ ÅëÁö..
+		m_pParent->ReceiveMessage(this, UIMSG_ICON_DBLCLK); // ë¶€ëª¨ì—ê²Œ ë²„íŠ¼ í´ë¦­ í†µì§€..
 		dwRet |= UI_MOUSEPROC_DONESOMETHING;
 		return dwRet;
 	}

@@ -18,16 +18,6 @@
 #include "UIInventory.h"
 #include "UIManager.h"
 
-#ifdef _DEBUG
-#undef THIS_FILE
-static char THIS_FILE[]=__FILE__;
-#define new DEBUG_NEW
-#endif
-
-//////////////////////////////////////////////////////////////////////
-// Construction/Destruction
-//////////////////////////////////////////////////////////////////////
-
 CUINPCChangeEvent::CUINPCChangeEvent()
 {
 	m_pBtn_Change		= NULL; 
@@ -68,13 +58,13 @@ bool CUINPCChangeEvent::Load(HANDLE hFile)
 	m_pBtn_Close		= (CN3UIButton*)GetChildByID("Btn_close");		__ASSERT(m_pBtn_Close,	"NULL UI Component!!");
 
 	// UIPointInitDlg.. ^^
-	e_Nation eNation = CGameProcedure::s_pPlayer->m_InfoBase.eNation; // ±¹°¡....
+	e_Nation eNation = CGameProcedure::s_pPlayer->m_InfoBase.eNation; // êµ­ê°€....
 	__TABLE_UI_RESRC* pTbl = CGameProcedure::s_pTbl_UI->Find(eNation);
 
 	m_pDlg = new CUIPointInitDlg();
 	m_pDlg->LoadFromFile(pTbl->szChangeInitBill);
 
-	// À§Ä¡ °è»ê ..
+	// ìœ„ì¹˜ ê³„ì‚° ..
 	int iXPos, iYPos;
 	iXPos = (iW/2) - (m_pDlg->GetRegion().right - m_pDlg->GetRegion().left)/2;
 	iYPos = (iH/2) - (m_pDlg->GetRegion().bottom - m_pDlg->GetRegion().top)/2;
