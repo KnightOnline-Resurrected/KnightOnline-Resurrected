@@ -505,7 +505,7 @@ void CN3SkyMng::InitToDefaultHardCoding()
 
 	// 임시 hard coding
 	__SKY_DAYCHANGE tmpDayChange;
-	m_DayChanges.reserve(64);
+	m_DayChanges.resize(64);
 	DWORD dwTime = 0;
 
 	// 해뜨기..
@@ -851,7 +851,7 @@ void CN3SkyMng::SetWeather(eSKY_WEATHER eWeather, int iPercentage)
 		// 날씨 변화 큐 만들기
 		m_WeatherChanges.clear();
 		m_iWeatherChangeCurPos = 0;
-		m_WeatherChanges.reserve(16);
+		m_WeatherChanges.resize(16);
 		__SKY_DAYCHANGE tmpWeatherChange;
 		int iPos = 0;
 
@@ -956,7 +956,7 @@ void CN3SkyMng::SetWeather(eSKY_WEATHER eWeather, int iPercentage)
 		// 날씨 변화 큐 만들기
 		m_WeatherChanges.clear();
 		m_iWeatherChangeCurPos = 0;
-		m_WeatherChanges.reserve(16);
+		m_WeatherChanges.resize(16);
 		__SKY_DAYCHANGE tmpWeatherChange;
 		__ColorValue crTmp1, crTmp2;
 		float fDelta = (0.5f + 0.3f * (100 - iPercentage) / 100.0f);
@@ -1287,7 +1287,7 @@ bool CN3SkyMng::Load(HANDLE hFile)
 	ReadFile(hFile, &iSDCC, 4, &dwRWC, NULL);
 	if(iSDCC > 0)
 	{
-		m_DayChanges.reserve(iSDCC);
+		m_DayChanges.resize(iSDCC);
 		for(i = 0; i < iSDCC; i++)
 		{
 			m_DayChanges[i].Load(hFile);

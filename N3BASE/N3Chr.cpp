@@ -1242,7 +1242,7 @@ bool CN3Chr::Save(HANDLE hFile)
 	// 내용이 없는 Part Data는 걸러낸다..
 	std::vector<CN3CPart*> PartsTmp = m_Parts;
 	m_Parts.clear();
-	m_Parts.reserve(64);
+	m_Parts.resize(64);
 
 	it_CPart it = PartsTmp.begin(), itEnd = PartsTmp.end();
 	CN3CPart* pPart = NULL;

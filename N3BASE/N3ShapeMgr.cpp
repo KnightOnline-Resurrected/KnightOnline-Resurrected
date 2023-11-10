@@ -108,7 +108,7 @@ bool CN3ShapeMgr::Load(HANDLE hFile)
 	if(iSC > 0)
 	{
 		CN3Shape* pShape = NULL;
-		m_Shapes.reserve(iSC);
+		m_Shapes.resize(iSC);
 		DWORD dwType = 0;
 		for(int i = 0; i < iSC; i++)
 		{
