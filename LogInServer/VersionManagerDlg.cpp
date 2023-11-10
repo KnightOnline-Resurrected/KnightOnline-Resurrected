@@ -22,7 +22,6 @@ CVersionManagerDlg::CVersionManagerDlg(CWnd* pParent /*=NULL*/)
 	
 	memset( m_strFtpUrl, NULL, 256 );
 	memset( m_strFilePath, NULL, 256 );
-	memset( m_strDefaultPath, NULL, _MAX_PATH );
 	m_nLastVersion = 0;
 	memset( m_ODBCName, NULL, 32 );
 	memset( m_ODBCLogin, NULL, 32 );
@@ -115,7 +114,6 @@ BOOL CVersionManagerDlg::GetInfoFromIni()
 	GetPrivateProfileString( "ODBC", "UID", "", m_ODBCLogin, 32, inipath );
 	GetPrivateProfileString( "ODBC", "PWD", "", m_ODBCPwd, 32, inipath );
 	GetPrivateProfileString( "ODBC", "TABLE", "", m_TableName, 32, inipath );
-	GetPrivateProfileString( "CONFIGURATION", "DEFAULT_PATH", "", m_strDefaultPath, 256, inipath );
 
 	m_nServerCount = GetPrivateProfileInt( "SERVER_LIST", "COUNT", 0, inipath );
 
