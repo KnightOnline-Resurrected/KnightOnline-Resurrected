@@ -771,19 +771,19 @@ BOOL CServerDlg::GetMonsterTableData()
 			Npc->m_iMagic1 = NpcTableSet.m_iMagic1;			// 사용마법 1
 			Npc->m_iMagic2 = NpcTableSet.m_iMagic2;			// 사용마법 2
 			Npc->m_iMagic3 = NpcTableSet.m_iMagic3;			// 사용마법 3	
-			Npc->m_byFireR = NpcTableSet.m_byFireR;			// 화염 저항력
-			Npc->m_byColdR = NpcTableSet.m_byColdR;			// 냉기 저항력
-			Npc->m_byLightningR = NpcTableSet.m_byLightningR;			// 전기 저항력
-			Npc->m_byMagicR = NpcTableSet.m_byMagicR;			// 마법 저항력
-			Npc->m_byDiseaseR = NpcTableSet.m_byDiseaseR;		// 저주 저항력
-			Npc->m_byPoisonR = NpcTableSet.m_byPoisonR;		// 독 저항력
-			Npc->m_byLightR = NpcTableSet.m_byLightR;		// 빛 저항력
+			Npc->m_iFireR = NpcTableSet.m_iFireR;			// 화염 저항력
+			Npc->m_iColdR = NpcTableSet.m_iColdR;			// 냉기 저항력
+			Npc->m_iLightningR = NpcTableSet.m_iLightningR;			// 전기 저항력
+			Npc->m_iMagicR = NpcTableSet.m_iMagicR;			// 마법 저항력
+			Npc->m_iDiseaseR = NpcTableSet.m_iDiseaseR;		// 저주 저항력
+			Npc->m_iPoisonR = NpcTableSet.m_iPoisonR;		// 독 저항력
+			Npc->m_iLightR = NpcTableSet.m_iLightR;		// 빛 저항력
 			Npc->m_sBulk	= NpcTableSet.m_sBulk;
 			Npc->m_bySearchRange = NpcTableSet.m_bySearchRange;	// 적 탐지 범위
 			Npc->m_byAttackRange = NpcTableSet.m_byAttackRange;	// 사정거리
 			Npc->m_byTracingRange = NpcTableSet.m_byTracingRange;	// 추격거리
 			//Npc->m_sAI = NpcTableSet.m_sAI;				// 인공지능 인덱스
-			Npc->m_tNpcType = NpcTableSet.m_byType;			// NPC Type
+			Npc->m_iNpcType = NpcTableSet.m_byType;			// NPC Type
 								// 0 : Monster
 								// 1 : Normal NPC
 			
@@ -883,19 +883,19 @@ BOOL CServerDlg::GetNpcTableData()
 			Npc->m_iMagic1 = NpcTableSet.m_iMagic1;			// 사용마법 1
 			Npc->m_iMagic2 = NpcTableSet.m_iMagic2;			// 사용마법 2
 			Npc->m_iMagic3 = NpcTableSet.m_iMagic3;			// 사용마법 3	
-			Npc->m_byFireR = NpcTableSet.m_byFireR;			// 화염 저항력
-			Npc->m_byColdR = NpcTableSet.m_byColdR;			// 냉기 저항력
-			Npc->m_byLightningR = NpcTableSet.m_byLightningR;			// 전기 저항력
-			Npc->m_byMagicR = NpcTableSet.m_byMagicR;			// 마법 저항력
-			Npc->m_byDiseaseR = NpcTableSet.m_byDiseaseR;		// 저주 저항력
-			Npc->m_byPoisonR = NpcTableSet.m_byPoisonR;		// 독 저항력
-			Npc->m_byLightR = NpcTableSet.m_byLightR;		// 빛 저항력
+			Npc->m_iFireR = NpcTableSet.m_iFireR;			// 화염 저항력
+			Npc->m_iColdR = NpcTableSet.m_iColdR;			// 냉기 저항력
+			Npc->m_iLightningR = NpcTableSet.m_iLightningR;			// 전기 저항력
+			Npc->m_iMagicR = NpcTableSet.m_iMagicR;			// 마법 저항력
+			Npc->m_iDiseaseR = NpcTableSet.m_iDiseaseR;		// 저주 저항력
+			Npc->m_iPoisonR = NpcTableSet.m_iPoisonR;		// 독 저항력
+			Npc->m_iLightR = NpcTableSet.m_iLightR;		// 빛 저항력
 			Npc->m_sBulk	= NpcTableSet.m_sBulk;
 			Npc->m_bySearchRange = NpcTableSet.m_bySearchRange;	// 적 탐지 범위
 			Npc->m_byAttackRange = NpcTableSet.m_byAttackRange;	// 사정거리
 			Npc->m_byTracingRange = NpcTableSet.m_byTracingRange;	// 추격거리
 			//Npc->m_sAI = NpcTableSet.m_sAI;				// 인공지능 인덱스
-			Npc->m_tNpcType = NpcTableSet.m_byType;			// NPC Type
+			Npc->m_iNpcType = NpcTableSet.m_iType;			// NPC Type
 								// 0 : Monster
 								// 1 : Normal NPC
 
@@ -913,7 +913,6 @@ BOOL CServerDlg::GetNpcTableData()
 				delete Npc;
 				Npc = NULL;
 			}
-			//m_arNpcTable.Add(Npc);
 
 			NpcTableSet.MoveNext();
 		}
@@ -1073,19 +1072,19 @@ BOOL CServerDlg::CreateNpcThread()
 					pNpc->m_iMagic1			= pNpcTable->m_iMagic1;		// 사용마법 1
 					pNpc->m_iMagic2			= pNpcTable->m_iMagic2;		// 사용마법 2
 					pNpc->m_iMagic3			= pNpcTable->m_iMagic3;		// 사용마법 3
-					pNpc->m_byFireR			= pNpcTable->m_byFireR;		// 화염 저항력
-					pNpc->m_byColdR			= pNpcTable->m_byColdR;		// 냉기 저항력
-					pNpc->m_byLightningR	= pNpcTable->m_byLightningR;	// 전기 저항력
-					pNpc->m_byMagicR		= pNpcTable->m_byMagicR;	// 마법 저항력
-					pNpc->m_byDiseaseR		= pNpcTable->m_byDiseaseR;	// 저주 저항력
-					pNpc->m_byPoisonR		= pNpcTable->m_byPoisonR;	// 독 저항력
-					pNpc->m_byLightR		= pNpcTable->m_byLightR;	// 빛 저항력
+					pNpc->m_byFireR			= pNpcTable->m_iFireR;		// 화염 저항력
+					pNpc->m_byColdR			= pNpcTable->m_iColdR;		// 냉기 저항력
+					pNpc->m_byLightningR	= pNpcTable->m_iLightningR;	// 전기 저항력
+					pNpc->m_byMagicR		= pNpcTable->m_iMagicR;	// 마법 저항력
+					pNpc->m_byDiseaseR		= pNpcTable->m_iDiseaseR;	// 저주 저항력
+					pNpc->m_byPoisonR		= pNpcTable->m_iPoisonR;	// 독 저항력
+					pNpc->m_byLightR		= pNpcTable->m_iLightR;	// 빛 저항력
 					pNpc->m_fBulk			= (float)( ((double)pNpcTable->m_sBulk / 100) * ((double)pNpcTable->m_sSize / 100) );
 					pNpc->m_bySearchRange	= pNpcTable->m_bySearchRange;	// 적 탐지 범위
 					pNpc->m_byAttackRange	= pNpcTable->m_byAttackRange;	// 사정거리
 					pNpc->m_byTracingRange	= pNpcTable->m_byTracingRange;	// 추격거리
 					pNpc->m_sAI				= pNpcTable->m_sAI;				// 인공지능 인덱스
-					pNpc->m_tNpcType		= pNpcTable->m_tNpcType;		// NPC Type
+					pNpc->m_tNpcType		= pNpcTable->m_iNpcType;		// NPC Type
 					pNpc->m_byFamilyType	= pNpcTable->m_byFamilyType;		// 몹들사이에서 가족관계를 결정한다.
 					pNpc->m_iMoney			= pNpcTable->m_iMoney;			// 떨어지는 돈
 					pNpc->m_iItem			= pNpcTable->m_iItem;			// 떨어지는 아이템
@@ -1129,8 +1128,7 @@ BOOL CServerDlg::CreateNpcThread()
 					pNpc->m_sMaxPathCount = NpcPosSet.m_DotCnt;
 
 					if( pNpc->m_byMoveType >= 2 && NpcPosSet.m_DotCnt == 0 )	{
-						TRACE("##### ServerDlg:CreateNpcThread - Path type Error :  nid=%d, sid=%d, name=%s, acttype=%d, path=%d #####\n", pNpc->m_sNid+NPC_BAND, pNpc->m_sSid, pNpc->m_strName, pNpc->m_byMoveType, pNpc->m_sMaxPathCount);
-						return FALSE;
+						TRACE("##### ServerDlg:CreateNpcThread - Path type Error :  nid=%d, sid=%d, name=%s, acttype=%d, path=%d #####\n", pNpc->m_sNid + NPC_BAND, pNpc->m_sSid, pNpc->m_strName, pNpc->m_byMoveType, pNpc->m_sMaxPathCount);
 					}
 
 					int index = 0;
@@ -1149,7 +1147,7 @@ BOOL CServerDlg::CreateNpcThread()
 						}
 					}
 
-					//pNpc->m_byType			= NpcPosSet.m_byType;
+					//pNpc->m_byType			= NpcPosSet.m_iType;
 
 					pNpc->m_tItemPer		= pNpcTable->m_tItemPer;	// NPC Type
 					pNpc->m_tDnPer			= pNpcTable->m_tDnPer;	// NPC Type
@@ -2471,19 +2469,19 @@ BOOL CServerDlg::AddObjectEventNpc(_OBJECT_EVENT* pEvent, int zone_number)
 	pNpc->m_iMagic1			= pNpcTable->m_iMagic1;		// 사용마법 1
 	pNpc->m_iMagic2			= pNpcTable->m_iMagic2;		// 사용마법 2
 	pNpc->m_iMagic3			= pNpcTable->m_iMagic3;		// 사용마법 3
-	pNpc->m_byFireR			= pNpcTable->m_byFireR;		// 화염 저항력
-	pNpc->m_byColdR			= pNpcTable->m_byColdR;		// 냉기 저항력
-	pNpc->m_byLightningR	= pNpcTable->m_byLightningR;	// 전기 저항력
-	pNpc->m_byMagicR		= pNpcTable->m_byMagicR;	// 마법 저항력
-	pNpc->m_byDiseaseR		= pNpcTable->m_byDiseaseR;	// 저주 저항력
-	pNpc->m_byPoisonR		= pNpcTable->m_byPoisonR;	// 독 저항력
-	pNpc->m_byLightR		= pNpcTable->m_byLightR;	// 빛 저항력
+	pNpc->m_byFireR			= pNpcTable->m_iFireR;		// 화염 저항력
+	pNpc->m_byColdR			= pNpcTable->m_iColdR;		// 냉기 저항력
+	pNpc->m_byLightningR	= pNpcTable->m_iLightningR;	// 전기 저항력
+	pNpc->m_byMagicR		= pNpcTable->m_iMagicR;	// 마법 저항력
+	pNpc->m_byDiseaseR		= pNpcTable->m_iDiseaseR;	// 저주 저항력
+	pNpc->m_byPoisonR		= pNpcTable->m_iPoisonR;	// 독 저항력
+	pNpc->m_byLightR		= pNpcTable->m_iLightR;	// 빛 저항력
 	pNpc->m_fBulk			= (float)( ((double)pNpcTable->m_sBulk / 100) * ((double)pNpcTable->m_sSize / 100) );
 	pNpc->m_bySearchRange	= pNpcTable->m_bySearchRange;	// 적 탐지 범위
 	pNpc->m_byAttackRange	= pNpcTable->m_byAttackRange;	// 사정거리
 	pNpc->m_byTracingRange	= pNpcTable->m_byTracingRange;	// 추격거리
 	pNpc->m_sAI				= pNpcTable->m_sAI;				// 인공지능 인덱스
-	pNpc->m_tNpcType		= pNpcTable->m_tNpcType;		// NPC Type
+	pNpc->m_tNpcType		= pNpcTable->m_iNpcType;		// NPC Type
 	pNpc->m_byFamilyType	= pNpcTable->m_byFamilyType;		// 몹들사이에서 가족관계를 결정한다.
 	pNpc->m_iMoney			= pNpcTable->m_iMoney;			// 떨어지는 돈
 	pNpc->m_iItem			= pNpcTable->m_iItem;			// 떨어지는 아이템

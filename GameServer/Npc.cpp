@@ -401,7 +401,7 @@ void CNpc::NpcTracing(CIOCPort* pIOCP)
 		m_fDelayTime = TimeGet();
 		return;
 	}
-	//else if(nFlag == 2 && m_tNpcType == NPC_BOSS_MONSTER)	{
+	//else if(nFlag == 2 && m_iNpcType == NPC_BOSS_MONSTER)	{
 	else if(nFlag == 2 && m_tNpcLongType == 2)	{
 		NpcMoveEnd(pIOCP);	// 이동 끝..
 		m_NpcState = NPC_FIGHTING;
@@ -522,7 +522,7 @@ void CNpc::NpcAttacking(CIOCPort* pIOCP)
 		return;
 	}
 
-	//if(m_tNpcType == NPCTYPE_DOOR || m_tNpcType == NPCTYPE_ARTIFACT || m_tNpcType == NPCTYPE_PHOENIX_GATE || m_tNpcType == NPCTYPE_GATE_LEVER)		return;		// 성문 NPC는 공격처리 안하게
+	//if(m_iNpcType == NPCTYPE_DOOR || m_iNpcType == NPCTYPE_ARTIFACT || m_iNpcType == NPCTYPE_PHOENIX_GATE || m_iNpcType == NPCTYPE_GATE_LEVER)		return;		// 성문 NPC는 공격처리 안하게
 
 	// 작업 : 이 부분에서.. 경비병도 공격이 가능하게...
 	if(m_tNpcType == NPC_DOOR || m_tNpcType == NPC_ARTIFACT || m_tNpcType == NPC_PHOENIX_GATE || m_tNpcType == NPC_GATE_LEVER || m_tNpcType == NPC_DOMESTIC_ANIMAL || m_tNpcType == NPC_SPECIAL_GATE || m_tNpcType == NPC_DESTORY_ARTIFACT)
@@ -585,7 +585,7 @@ void CNpc::NpcMoving(CIOCPort* pIOCP)
 	}
 
 	if(FindEnemy() == TRUE)	{	// 적을 찾는다. 
-	/*	if(m_tNpcType == NPCTYPE_GUARD) 
+	/*	if(m_iNpcType == NPCTYPE_GUARD) 
 		{ 
 			NpcMoveEnd(pIOCP);	// 이동 끝..
 			m_NpcState = NPC_FIGHTING; 
@@ -970,11 +970,11 @@ BOOL CNpc::SetLive(CIOCPort* pIOCP)
 					m_nInitX = m_fPrevX = m_fCurX;
 					m_nInitY = m_fPrevY = m_fCurY;
 					m_nInitZ = m_fPrevZ = m_fCurZ;
-					TRACE("### fail : sid = %d, nid = %d, zone=%d, loop = %d 나 설자리가 이상해... 고쳐줘... x = %d, y = %d\n", m_sSid, m_sNid+NPC_BAND, m_sCurZone, i, nX, nZ);
-					return FALSE;
+					//TRACE("### fail : sid = %d, nid = %d, zone=%d, loop = %d 나 설자리가 이상해... 고쳐줘... x = %d, y = %d\n", m_sSid, m_sNid+NPC_BAND, m_sCurZone, i, nX, nZ);
+					//return FALSE;
 			
 				}
-				continue;
+				//continue;
 			}
 
 			m_nInitX = m_fPrevX = m_fCurX = (float)nX;
@@ -1771,7 +1771,7 @@ BOOL CNpc::FindEnemy()
 	fCompareDis = 0.0f;
 
 	// 타입이 경비병인 경우에는 같은 나라의 몬스터가 아닌경우에는 몬스터를 공격하도록 한다..
-	if(m_tNpcType == NPC_GUARD || m_tNpcType == NPC_PATROL_GUARD || m_tNpcType == NPC_STORE_GUARD) // || m_tNpcType == NPCTYPE_MONSTER)	
+	if(m_tNpcType == NPC_GUARD || m_tNpcType == NPC_PATROL_GUARD || m_tNpcType == NPC_STORE_GUARD) // || m_iNpcType == NPCTYPE_MONSTER)	
 	{
 		fCompareDis = FindEnemyExpand(m_iRegion_X, m_iRegion_Z, fCompareDis, 2);
 
@@ -2412,7 +2412,7 @@ int CNpc::IsCloseTarget(int nRange, int Flag)
 	m_Target.x = fX;
 	m_Target.z = fZ;
 
-	//if( m_tNpcLongType && m_tNpcType != NPC_BOSS_MONSTER)	{		// 장거리 공격이 가능한것은 공격거리로 판단..
+	//if( m_tNpcLongType && m_iNpcType != NPC_BOSS_MONSTER)	{		// 장거리 공격이 가능한것은 공격거리로 판단..
 	if( m_tNpcLongType == 1 )	{		// 장거리 공격이 가능한것은 공격거리로 판단..
 		if(fDis < LONG_ATTACK_RANGE)	return 1;
 		else if(fDis > LONG_ATTACK_RANGE && fDis <= nRange) return 2;
@@ -2639,7 +2639,7 @@ int CNpc::Attack(CIOCPort* pIOCP)
 		if( bTeleport )		return m_Delay;
 	}	*/
 
-	//if( m_tNpcLongType==1 && m_tNpcType != NPC_BOSS_MONSTER )	{
+	//if( m_tNpcLongType==1 && m_iNpcType != NPC_BOSS_MONSTER )	{
 	if( m_tNpcLongType == 1 )	{		// 장거리 공격이 가능한것은 공격거리로 판단..
 		m_Delay = LongAndMagicAttack(pIOCP);
 		return m_Delay;
@@ -2663,7 +2663,7 @@ int CNpc::Attack(CIOCPort* pIOCP)
 		return 0;							// IsCloseTarget()에 유저 x, y값을 갱신하고 Delay = 0으로 줌
 	}	
 	else if( ret == 2 )	{
-		//if(m_tNpcType == NPC_BOSS_MONSTER)	{		// 대장 몬스터이면.....
+		//if(m_iNpcType == NPC_BOSS_MONSTER)	{		// 대장 몬스터이면.....
 		if(m_tNpcLongType == 2)	{		// 직접, 간접(롱)공격이 가능한 몬스터 이므로 장거리 공격을 할 수 있다.
 			m_Delay = LongAndMagicAttack(pIOCP);
 			return m_Delay;
@@ -2729,7 +2729,7 @@ int CNpc::Attack(CIOCPort* pIOCP)
 			}	
 		}	*/
 
-		//if(m_tNpcType == NPC_BOSS_MONSTER)	{		// 대장 몬스터이면.....
+		//if(m_iNpcType == NPC_BOSS_MONSTER)	{		// 대장 몬스터이면.....
 		if(m_byWhatAttackType == 4 || m_byWhatAttackType == 5)	{		// 지역 마법 사용 몬스터이면.....
 			nRandom = myrand(1, 10000);
 			if(nRandom < nPercent)	{				// 지역마법공격...
@@ -2866,7 +2866,7 @@ int CNpc::LongAndMagicAttack(CIOCPort* pIOCP)
 		return 0;							// IsCloseTarget()에 유저 x, y값을 갱신하고 Delay = 0으로 줌
 	}	
 	else if( ret == 2 )	{
-		//if(m_tNpcType != NPC_BOSS_MONSTER)	{		// 대장 몬스터이면.....
+		//if(m_iNpcType != NPC_BOSS_MONSTER)	{		// 대장 몬스터이면.....
 		if(m_tNpcLongType == 1)	{		// 장거리 몬스터이면.....
 			m_sStepCount = 0;
 			m_byActionFlag = ATTACK_TO_TRACE;
@@ -4381,6 +4381,7 @@ void CNpc::SendNpcInfoAll(char *temp_send, int &index, int count)
 	else
 		SetByte(temp_send, 1, index );					// region에 등록		
 	SetShort(temp_send, m_sNid+NPC_BAND, index );
+	SetShort(temp_send, m_sSid, index);
 	SetShort(temp_send, m_sPid, index );
 	SetShort(temp_send, m_sSize, index );
 	SetInt(temp_send, m_iWeapon_1, index );
@@ -5478,7 +5479,7 @@ BOOL CNpc::IsInExpRange(CUser* pUser)
 BOOL CNpc::CheckFindEnermy()
 {
 	// 경비병은 몬스터도 공격하므로 제외
-	if(m_tNpcType == NPC_GUARD || m_tNpcType == NPC_PATROL_GUARD || m_tNpcType == NPC_STORE_GUARD ) // || m_tNpcType == NPCTYPE_MONSTER)
+	if(m_tNpcType == NPC_GUARD || m_tNpcType == NPC_PATROL_GUARD || m_tNpcType == NPC_STORE_GUARD ) // || m_iNpcType == NPCTYPE_MONSTER)
 		return TRUE;
 
 	if(m_ZoneIndex < 0 || m_ZoneIndex > m_pMain->g_arZone.size()) {
@@ -5961,19 +5962,19 @@ void CNpc::ChangeMonsterInfomation(int iChangeType)
 	m_iMagic1		= pNpcTable->m_iMagic1;		// 사용마법 1
 	m_iMagic2		= pNpcTable->m_iMagic2;		// 사용마법 2
 	m_iMagic3		= pNpcTable->m_iMagic3;		// 사용마법 3
-	m_byFireR		= pNpcTable->m_byFireR;		// 화염 저항력
-	m_byColdR		= pNpcTable->m_byColdR;		// 냉기 저항력
-	m_byLightningR	= pNpcTable->m_byLightningR;	// 전기 저항력
-	m_byMagicR		= pNpcTable->m_byMagicR;	// 마법 저항력
-	m_byDiseaseR	= pNpcTable->m_byDiseaseR;	// 저주 저항력
-	m_byPoisonR		= pNpcTable->m_byPoisonR;	// 독 저항력
-	m_byLightR		= pNpcTable->m_byLightR;	// 빛 저항력
+	m_byFireR		= pNpcTable->m_iFireR;		// 화염 저항력
+	m_byColdR		= pNpcTable->m_iColdR;		// 냉기 저항력
+	m_byLightningR	= pNpcTable->m_iLightningR;	// 전기 저항력
+	m_byMagicR		= pNpcTable->m_iMagicR;	// 마법 저항력
+	m_byDiseaseR	= pNpcTable->m_iDiseaseR;	// 저주 저항력
+	m_byPoisonR		= pNpcTable->m_iPoisonR;	// 독 저항력
+	m_byLightR		= pNpcTable->m_iLightR;	// 빛 저항력
 	m_fBulk			= (float)( ((double)pNpcTable->m_sBulk / 100) * ((double)pNpcTable->m_sSize / 100) );
 	m_bySearchRange	= pNpcTable->m_bySearchRange;	// 적 탐지 범위
 	m_byAttackRange	= pNpcTable->m_byAttackRange;	// 사정거리
 	m_byTracingRange	= pNpcTable->m_byTracingRange;	// 추격거리
 	m_sAI				= pNpcTable->m_sAI;				// 인공지능 인덱스
-	m_tNpcType		= pNpcTable->m_tNpcType;		// NPC Type
+	m_tNpcType		= pNpcTable->m_iNpcType;		// NPC Type
 	m_byFamilyType	= pNpcTable->m_byFamilyType;		// 몹들사이에서 가족관계를 결정한다.
 	m_iMoney		= pNpcTable->m_iMoney;			// 떨어지는 돈
 	m_iItem			= pNpcTable->m_iItem;			// 떨어지는 아이템
@@ -6116,7 +6117,7 @@ void CNpc::NpcHealing(CIOCPort* pIOCP)
 		return;							// IsCloseTarget()에 유저 x, y값을 갱신하고 Delay = 0으로 줌
 	}	
 	else if( ret == 2 )	{
-		//if(m_tNpcType == NPC_BOSS_MONSTER)	{		// 대장 몬스터이면.....
+		//if(m_iNpcType == NPC_BOSS_MONSTER)	{		// 대장 몬스터이면.....
 		if(m_tNpcLongType == 2)	{		// 직접, 간접(롱)공격이 가능한 몬스터 이므로 장거리 공격을 할 수 있다.
 			m_Delay = LongAndMagicAttack(pIOCP);
 			m_fDelayTime = TimeGet();
@@ -6269,13 +6270,13 @@ void CNpc::ChangeAbility(int iChangeType)	// iChangeType - 0:능력치 다운, 1
 		nHP = pNpcTable->m_iMaxHP * 0.5;
 		nAC = pNpcTable->m_sDefense * 0.2;
 		nDamage = pNpcTable->m_sDamage * 0.3;
-		nLightR = pNpcTable->m_byLightR*0.5;
-		nMagicR = pNpcTable->m_byMagicR*0.5;
-		nDiseaseR = pNpcTable->m_byDiseaseR*0.5;
-		nPoisonR = pNpcTable->m_byPoisonR*0.5;
-		nLightningR = pNpcTable->m_byLightningR*0.5;
-		nFireR = pNpcTable->m_byFireR*0.5;
-		nColdR = pNpcTable->m_byColdR*0.5;
+		nLightR = pNpcTable->m_iLightR*0.5;
+		nMagicR = pNpcTable->m_iMagicR*0.5;
+		nDiseaseR = pNpcTable->m_iDiseaseR*0.5;
+		nPoisonR = pNpcTable->m_iPoisonR*0.5;
+		nLightningR = pNpcTable->m_iLightningR*0.5;
+		nFireR = pNpcTable->m_iFireR*0.5;
+		nColdR = pNpcTable->m_iColdR*0.5;
 		m_iMaxHP = nHP;
 		if( m_iHP > nHP )	{	// HP도 바꿔야 겠군,,
 			HpChange( &m_pMain->m_Iocport );
@@ -6300,13 +6301,13 @@ void CNpc::ChangeAbility(int iChangeType)	// iChangeType - 0:능력치 다운, 1
 		}
 		m_sDamage		= pNpcTable->m_sDamage;		// 기본 데미지
 		m_sDefense		= pNpcTable->m_sDefense;	// 방어값
-		m_byFireR		= pNpcTable->m_byFireR;		// 화염 저항력
-		m_byColdR		= pNpcTable->m_byColdR;		// 냉기 저항력
-		m_byLightningR	= pNpcTable->m_byLightningR;	// 전기 저항력
-		m_byMagicR		= pNpcTable->m_byMagicR;	// 마법 저항력
-		m_byDiseaseR	= pNpcTable->m_byDiseaseR;	// 저주 저항력
-		m_byPoisonR		= pNpcTable->m_byPoisonR;	// 독 저항력
-		m_byLightR		= pNpcTable->m_byLightR;	// 빛 저항력
+		m_byFireR		= pNpcTable->m_iFireR;		// 화염 저항력
+		m_byColdR		= pNpcTable->m_iColdR;		// 냉기 저항력
+		m_byLightningR	= pNpcTable->m_iLightningR;	// 전기 저항력
+		m_byMagicR		= pNpcTable->m_iMagicR;	// 마법 저항력
+		m_byDiseaseR	= pNpcTable->m_iDiseaseR;	// 저주 저항력
+		m_byPoisonR		= pNpcTable->m_iPoisonR;	// 독 저항력
+		m_byLightR		= pNpcTable->m_iLightR;	// 빛 저항력
 	}
 }
 

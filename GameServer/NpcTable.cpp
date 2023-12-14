@@ -45,18 +45,18 @@ void CNpcTable::Initialize()
 	m_iMagic1 = 0;			// 사용마법 1
 	m_iMagic2 = 0;			// 사용마법 2
 	m_iMagic3 = 0;			// 사용마법 3	
-	m_byFireR = 0;			// 화염 저항력
-	m_byColdR = 0;			// 냉기 저항력
-	m_byLightR = 0;			// 빛 저항력
-	m_byMagicR = 0;			// 마법 저항력
-	m_byDiseaseR = 0;		// 저주 저항력
-	m_byPoisonR = 0;		// 독 저항력
+	m_iFireR = 0;			// 화염 저항력
+	m_iColdR = 0;			// 냉기 저항력
+	m_iLightR = 0;			// 빛 저항력
+	m_iMagicR = 0;			// 마법 저항력
+	m_iDiseaseR = 0;		// 저주 저항력
+	m_iPoisonR = 0;		// 독 저항력
 	m_sBulk  = 0;
 	m_bySearchRange = 0;	// 적 탐지 범위
 	m_byAttackRange = 0;	// 사정거리
 	m_byTracingRange = 0;
 	m_sAI = 0;				// 인공지능 인덱스
-	m_tNpcType = 0;			// NPC Type
+	m_iNpcType = 0;			// NPC Type
 						// 0 : Monster
 						// 1 : Normal NPC
 	m_byFamilyType = 0;		// 몹들사이에서 가족관계를 결정한다.

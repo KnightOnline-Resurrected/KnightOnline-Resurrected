@@ -44,7 +44,7 @@ UINT NpcThreadProc(LPVOID pParam /* NPC_THREAD_INFO ptr */)
 			pNpc = pInfo->pNpc[i];
 			pIOCP = pInfo->pIOCP;
 			if( !pNpc ) continue;
-			//if((pNpc->m_tNpcType == NPCTYPE_DOOR || pNpc->m_tNpcType == NPCTYPE_ARTIFACT || pNpc->m_tNpcType == NPCTYPE_PHOENIX_GATE || pNpc->m_tNpcType == NPCTYPE_GATE_LEVER) && !pNpc->m_bFirstLive) continue;
+			//if((pNpc->m_iNpcType == NPCTYPE_DOOR || pNpc->m_iNpcType == NPCTYPE_ARTIFACT || pNpc->m_iNpcType == NPCTYPE_PHOENIX_GATE || pNpc->m_iNpcType == NPCTYPE_GATE_LEVER) && !pNpc->m_bFirstLive) continue;
 			//if( pNpc->m_bFirstLive ) continue;
 			if( pNpc->m_sNid < 0 ) continue;		// 잘못된 몬스터 (임시코드 2002.03.24)
 

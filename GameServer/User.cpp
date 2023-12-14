@@ -111,7 +111,7 @@ void CUser::Attack(int sid, int tid)
 	if(pNpc->m_NpcState == NPC_DEAD) return;
 	if(pNpc->m_iHP == 0) return;
 
-/*	if(pNpc->m_tNpcType == NPCTYPE_GUARD)					// 경비병이면 타겟을 해당 유저로
+/*	if(pNpc->m_iNpcType == NPCTYPE_GUARD)					// 경비병이면 타겟을 해당 유저로
 	{
 		pNpc->m_Target.id = m_iUserId + USER_BAND;
 		pNpc->m_Target.x = m_curx;
