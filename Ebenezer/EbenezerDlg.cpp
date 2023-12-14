@@ -301,10 +301,6 @@ BOOL CEbenezerDlg::OnInitDialog()
 	m_fReConnectStart = 0.0f;
 	// sungyong~ 2002.05.23
 
-	if( AfxMessageBox("If you are restarting, please restart after all data is saved...do you want to continue?", MB_OKCANCEL) == IDCANCEL ) {
-		AfxPostQuitMessage(0);
-		return FALSE;
-	}
 	//----------------------------------------------------------------------
 	//	Logfile initialize
 	//----------------------------------------------------------------------
@@ -716,7 +712,7 @@ BOOL CEbenezerDlg::AIServerConnect()
 {
 	C3DMap* pMap = NULL;
 
-	strcpy(m_AIServerIP, m_Ini.GetProfileString("AI_SERVER", "IP", "192.203.143.119"));
+	strcpy(m_AIServerIP, m_Ini.GetProfileString("AI_SERVER", "IP", "127.0.0.1"));
 	
 	
 	for( int i=0; i<MAX_AI_SOCKET; i++ ) {
